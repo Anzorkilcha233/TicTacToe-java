@@ -1,9 +1,24 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class TicTacToe {
-
     static String[] board;
     static String turn;
+
+    static void printBoard() {
+        System.out.println("|---|---|---|");
+        System.out.println("| " + board[0] + " | "
+                + board[1] + " | " + board[2]
+                + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[3] + " | "
+                + board[4] + " | " + board[5]
+                + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[6] + " | "
+                + board[7] + " | " + board[8]
+                + " |");
+        System.out.println("|---|---|---|");
+    }
 
     static String checkWinner() {
         for (int a = 0; a < 8; a++) {
@@ -54,82 +69,8 @@ public class TicTacToe {
                 return "draw";
             }
         }
-
         System.out.println("Игрок " + "(" + turn + ")" + ", введите номер клетки для вашего хода:");
         return null;
-    }
 
-    static void printBoard() {
-        System.out.println("|---|---|---|");
-        System.out.println("| " + board[0] + " | "
-                + board[1] + " | " + board[2]
-                + " |");
-        System.out.println("|-----------|");
-        System.out.println("| " + board[3] + " | "
-                + board[4] + " | " + board[5]
-                + " |");
-        System.out.println("|-----------|");
-        System.out.println("| " + board[6] + " | "
-                + board[7] + " | " + board[8]
-                + " |");
-        System.out.println("|---|---|---|");
-    }
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        board = new String[9];
-        turn = "X";
-        String winner = null;
-
-        for (int a = 0; a < 9; a++) {
-            board[a] = String.valueOf(a + 1);
-        }
-
-        System.out.println("Добро пожаловать на игру Крестики-нолики!");
-        printBoard();
-
-        System.out.println("Игрок (X), введите номер клетки для вашего хода:");
-
-        while (winner == null) {
-            int numInput;
-
-            try {
-                numInput = in.nextInt();
-                if (!(numInput > 0 && numInput <= 9)) {
-                    System.out.println("Неверный формат, попробуйте ввести еще раз:");
-                    continue;
-                }
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Неверный формат, попробуйте ввести еще раз:");
-                continue;
-            }
-
-            if (board[numInput - 1].equals(String.valueOf(numInput))) {
-                board[numInput - 1] = turn;
-
-                if (turn.equals("X")) {
-                    turn = "O";
-                }
-                else {
-                    turn = "X";
-                }
-
-                printBoard();
-                winner = checkWinner();
-            }
-            else {
-                System.out.println("Эта клетка занята, введите еще раз:");
-            }
-        }
-
-        if (winner.equalsIgnoreCase("draw")) {
-            System.out.println("Ничья!");
-        }
-
-        else {
-            System.out.println("Поздравляем! Игрок  " + "(" + winner + ")" + ", победил!");
-        }
-        in.close();
     }
 }
